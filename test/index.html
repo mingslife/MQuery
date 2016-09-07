@@ -6,12 +6,18 @@
 </head>
 <body>
 <div id="test"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">123</div>
+	</div>
+</div>
 
 <script type="text/javascript" src="../js/mquery.js"></script>
 <script type="text/javascript">
 m(function() {
 	console.info("test!!");
 	console.info(m("#test"));
+	console.info(m(".container .row .col-md-12"));
 });
 </script>
 </body>

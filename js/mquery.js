@@ -3,15 +3,41 @@
 	function MQuery(selector) {
 		return new MQuery.prototype.init(selector);
 	}
-	MQuery.prototype.init = function(selector) {
-		this.selector = selector;
-		if (typeof selector === "function") {
-			window.addEventListener("load", selector, false);
-			return;
+	MQuery.prototype = {
+		constructor: MQuery,
+		init: function(selector) {
+			this.selector = selector;
+			if (typeof selector === "function") {
+				window.addEventListener("load", selector, false);
+			} else {
+				console.info(this.);
+				// this.element = this.find(selector);
+			}
+		},
+		find: function(selector) {
+			if (selector.indexOf(" ") !== -1) {
+				var selectors = selector.split(" ").filter(function(item) {return item;});
+				console.info(selectors);
+				var element = null;
+				for (var i = 0, length = selectors.length; i < length; i++) {
+					element = element.find(selectors[i]);
+				}
+			} else {
+				switch (selector[0]) {
+					case "#": this.element = this._getById(this.element, selector.substring(1)); break;
+					case ".": this.element = this._getByClass(this.element, selector.substring(1)); break;
+				}
+			}
+		},
+		toString: function() {
+			return "MQuery: " + this.selector;
 		}
-		if (selector[0] === '#') {
-			return document.getElementById(selector.substring(1));
-		}
+	};
+	MQuery._getById = function(element, id) {
+		return element.getElementById(id);
+	};
+	MQuery._getByClass = function(element, className) {
+		return element.getElementsByClassName ? element.getElementsByClassName(className) : null;
 	};
 	/*MQuery.$temp = {
 		$namespace: {}
