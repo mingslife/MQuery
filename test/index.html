@@ -5,10 +5,11 @@
 	<title>MQuery</title>
 </head>
 <body>
+<input type="text" name="name">
 <div id="test"></div>
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">123</div>
+		<div class="col-md-12" data-m-model="message">123</div>
 	</div>
 </div>
 
@@ -17,8 +18,26 @@
 m(function() {
 	console.info("test!!");
 	console.info(m("#test"));
-	console.info(m(".container .row .col-md-12"));
+	// console.info(m(".container .row .col-md-12"));
 });
+
+function compute(string) {
+	var temp = new Array(string.length);
+	for (var i = 0, length = string.length; i < length; i++) temp[i] = string[i];
+	var result = new Array(string.length);
+	for (i = 0; i < length; i++) {
+		var character = temp[i];
+		if (character == ")") {
+			result[i] = ")";
+			temp[i] = null;
+			for (var j = i - 1; j >= 0 && temp[j] != "("; j--);
+			result[j] = "(";
+			temp[j] = null;
+		}
+	}
+	var output = result.join("");
+	return "子串: " + output + ", 长度: " + output.length;
+}
 </script>
 </body>
 </html>
