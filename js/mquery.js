@@ -1,4 +1,4 @@
-(function() {
+(function(window, undefined) {
 	"use strict";
 	var Util = {
 		EVENTS: "click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste".split(" "),
